@@ -60,15 +60,12 @@ $(function () {
     ////
     cy.on('cxttap', 'node', function () {
 
-        thisPaper = this.id();
-        console.log(papers);
+        let paperid = this.id();
 
-
-        cy.remove(cy.elements("node#" + thisPaper + "]"));
-
+        cy.remove(cy.elements("node#" + paperid + "]"));
 
         papers = papers.filter(function (paper) {
-            return paper.id != thisPaper;
+            return paper.id !== paperid;
         });
 
     });
@@ -108,21 +105,19 @@ $(function () {
             });
             return;
         }
-        
+
         $.get({
             url: url,
             success: function (res) {
-                paper = {
-                    'res': res,
+                let paper = {
                     'title': $('h1.title.mathjax', $(res))[0].innerText.slice(6),
-                    'url': 'https://arxiv.org/pdf/' + url.split('/').pop() + '.pdf',
+                    'url': pdf_url,
                     'id': uuid4()
                 };
                 papers.push(paper);
                 showPDF(paper, cy);
             }
         });
-
     });
 });
 

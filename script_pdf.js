@@ -1,4 +1,3 @@
-
 var __PDF_DOC,
     __CURRENT_PAGE,
     __TOTAL_PAGES,
@@ -90,7 +89,6 @@ function showPage(page_no, cy, paper) {
                     },
                     style: {
                         'label': paper.title,
-
                         'shape': 'square',
                         'width': '149px',
                         'height': '211px',
@@ -109,8 +107,6 @@ function showPage(page_no, cy, paper) {
                 directed: true,
                 padding: 0.1,
                 spacingFactor: 0.8
-
-
             });
             layout.run();
 
@@ -122,7 +118,7 @@ function showPage(page_no, cy, paper) {
                 papers.forEach(function (p) {
 
 
-                    if (p.title != paper.title) {
+                    if (p.title !== paper.title) {
 
                         if (p.text.indexOf(paper.title.replace(/\s|,|:|-/g, '').toLowerCase().trim()) >= 0) {
 
@@ -172,7 +168,6 @@ function showPage(page_no, cy, paper) {
             });
         });
     });
-
 
 
     function gettext(pdfUrl) {

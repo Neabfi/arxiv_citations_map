@@ -1,29 +1,27 @@
-
-
-body { 
-  font: 14px helvetica neue, helvetica, arial, sans-serif;
+body {
+    font: 14px helvetica neue, helvetica, arial, sans-serif;
 }
 
 #cy {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
-
-
-/* */
-
-
-#form {
-  z-index:1000;
-  position: fixed;
-}
-
-
 
 #pdf-canvas {
-  display: none;
+    display: none;
 }
 
+
+/* Form */
+
+#form {
+    z-index: 1000;
+    position: fixed;
+}
+
+#form_text {
+    width: 250px;
+}

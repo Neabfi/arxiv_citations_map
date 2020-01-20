@@ -1,0 +1,18 @@
+{
+  "name": "arxiv-graph",
+  "version": "1.0.0",
+  "description": "",
+  "main": "code.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cytoscape": "^3.13.0",
+    "htmlparser": "^1.7.7",
+    "jquery": "^3.4.1",
+    "pdfjs-dist": "^1.5.188",
+    "sweetalert": "^2.1.2"
+  }
+}

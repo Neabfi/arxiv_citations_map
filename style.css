@@ -1,3 +1,7 @@
+/**
+* General
+**/
+
 body {
     font: 14px helvetica neue, helvetica, arial, sans-serif;
 }
@@ -15,13 +19,99 @@ body {
 }
 
 
-/* Form */
+/**
+* Sweetalert
+**/
 
-#form {
+.swal-title {
+    margin: 0px;
+    font-size: 16px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.21);
+    margin-bottom: 28px;
+    box-shadow: none;
+}
+
+.swal2-icon.swal2-error {
+    width: 10px;
+    height: 10px;
+}
+
+.swal-footer {
+    box-shadow: none;
+}
+
+/**
+* Form
+**/
+
+.title {
+    font-family: 'Lucida Grande', helvetica, arial, verdana, sans-serif;
+    font-size: 1.4em;
+    margin-top: 2px;
+    margin-bottom: 4px;
+    margin-left: 2px;
+    padding: 0;
+}
+
+.form_container {
     z-index: 1000;
     position: fixed;
 }
 
-#form_text {
+.form_text {
     width: 250px;
+    height: 20px;
+    box-shadow: 1px 1px 1px grey;
+    outline: none;
+    border: solid 1px gray;
+    padding: 1px 4px;
+}
+
+.form_text:hover {
+    box-shadow: none;
+}
+
+
+.form_submit {
+    border: none;
+    height: 24px;
+    width: 40px;
+    background-color: #b31b1b;
+    box-shadow: 1px 1px 1px grey;
+    color: white;
+    outline: none;
+}
+
+.form_submit:hover {
+    box-shadow: none;
+}
+
+.form_submit:active {
+    background-color: #851B1B;
+}
+
+/**
+* Instructions
+**/
+
+.instructions_title {
+    font-size: 0.8em;
+    color: grey;
+    margin-top: 5px;
+    margin-left: 3px;
+    margin-bottom: 0px;
+    display: inline-block;
+}
+
+.instructions {
+    font-size: 0.8em;
+    color: grey;
+    margin-top: 5px;
+    display: none;
+    margin-top: 3px;
+    margin-left: 3px;
+}
+
+.instructions_title:hover + .instructions {
+    display: block;
 }

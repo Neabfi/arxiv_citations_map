@@ -72,6 +72,22 @@ $(function () {
             return paper.arxivId !== paperid;
         });
 
+
+        // Refresh graph
+        var layout = cy.layout({
+            name: 'breadthfirst',
+            directed: true,
+            padding: 1,
+            spacingFactor: 1.75
+        });
+        layout.run();
+        console.log(papers.length);
+        if(papers.length === 0) {
+            cy.fit(cy.filter('node'), 250);
+        } else if(papers.length < 4) {
+            cy.fit(cy.filter('node'), 150);
+        }
+
     });
 
 

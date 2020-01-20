@@ -11,10 +11,8 @@ class Paper {
         if (url.indexOf('arxiv.org/abs') < 0) {
             swal({
                 position: 'top',
-                icon: 'error',
-                title: 'arXiv link required (do not use the pdf\'s link)',
+                title: 'This is not a valid arXiv link (Do not use directly the PDF).',
                 showConfirmButton: false,
-                timer: 1500
             });
             return false;
         }
@@ -25,10 +23,8 @@ class Paper {
         if (papers.some(e => e.arxivUrl === url)) {
             swal({
                 position: 'top',
-                icon: 'error',
-                title: 'This paper is already in the graph',
+                title: 'This paper is already added.',
                 showConfirmButton: false,
-                timer: 1500
             });
             return true;
         }
@@ -141,7 +137,7 @@ class Paper {
         layout.run();
         console.log(papers.length);
         if(papers.length === 0) {
-            cy.fit(cy.$('#' + this.arxivId.replace('.', '-')), 250);
+            cy.fit(cy.$('#' + this.arxivId.replace('.', '-')), 230);
         } else if(papers.length < 4) {
             cy.fit(cy.filter('node'), 150);
         }

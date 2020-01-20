@@ -13,11 +13,21 @@
 <canvas id="pdf-canvas" width="149" height="211"></canvas>
 
 
-<form id='form'>
-    <input type="text" name="" id="form_text" placeholder="Arxiv URL">
-    <input type="submit" name="" id="form_submit" value="Add">
-    <span>(Right-click a paper to delete it.)</span>
-</form>
+<div class="form_container">
+    <h1 class="title">arXiv papers map</h1>
+    <form id="form">
+        <input type="text" name="" id="form_text" class="form_text" placeholder="arXiv URL">
+        <input type="submit" name="" id="form_submit" class="form_submit" value="Add">
+    </form>
+    <p class="instructions_title">How to use it?</p>
+    <p class="instructions">
+        Right-click on a paper to delete it. <br>
+        Drag & drop outside of a paper to move the camera. <br>
+        Drag & drop a paper to move it. <br>
+        Pinch to zoom. <br>
+    </p>
+</div>
+
 
 <script src="./node_modules/jquery/dist/jquery.min.js"></script>
 <script src="./node_modules/sweetalert/dist/sweetalert.min.js"></script>

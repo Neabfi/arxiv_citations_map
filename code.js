@@ -62,10 +62,12 @@ $(function () {
 
         let paperid = this.id();
 
-        cy.remove(cy.elements("node#" + paperid + "]"));
+        cy.remove(cy.elements("node#" + paperid.replace('.', '-') + "]"));
 
+        console.log(paperid)
         papers = papers.filter(function (paper) {
-            return paper.id !== paperid;
+            console.log(paper.arxivId);
+            return paper.arxivId !== paperid;
         });
 
     });
@@ -79,45 +81,15 @@ $(function () {
 
         let form_text = $('#form_text');
         let url = form_text.val();
-        let pdf_url = 'https://arxiv.org/pdf/' + url.split('/').pop() + '.pdf'
         form_text.val('');
 
-        // If not an arxiv link
-        if (url.indexOf('arxiv.org/abs') < 0) {
-            swal({
-                position: 'top',
-                icon: 'error',
-                title: 'arXiv link required (not directly the pdf)',
-                showConfirmButton: false,
-                timer: 1500
-            });
+        let paper = Paper.CreatePaper(url, papers, cy);
+        console.log(paper);
+        if (paper == null) {
             return;
         }
 
-        // If paper already added
-        if (papers.some(e => e.url === pdf_url)) {
-            swal({
-                position: 'top',
-                icon: 'error',
-                title: 'This paper is already in the graph',
-                showConfirmButton: false,
-                timer: 1500
-            });
-            return;
-        }
 
-        $.get({
-            url: url,
-            success: function (res) {
-                let paper = {
-                    'title': $('h1.title.mathjax', $(res))[0].innerText.slice(6),
-                    'url': pdf_url,
-                    'id': uuid4()
-                };
-                papers.push(paper);
-                showPDF(paper, cy);
-            }
-        });
     });
 });
 

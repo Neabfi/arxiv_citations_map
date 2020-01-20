@@ -1,6 +1,6 @@
 # Arxiv papers map
 
-Build a map of citations for arxiv papers. [[Demo](https://www.google.com)]
+Build a map of citations for arxiv papers. [[Demo](http://fabiendelattre.com/arxivpapersmap/)]
 
 
 ![](demo.gif)

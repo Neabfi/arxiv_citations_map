@@ -50,10 +50,12 @@ $(function () {
         layout: {
             name: 'breadthfirst',
             directed: true,
-            padding: 10
+            padding: 10,
+        },
+        zoom:{
+            level: 10
         }
     });
-
 
     ////
     //  Right click on nodes
@@ -84,11 +86,11 @@ $(function () {
         form_text.val('');
 
         let paper = Paper.CreatePaper(url, papers, cy);
+
         console.log(paper);
         if (paper == null) {
             return;
         }
-
 
     });
 });

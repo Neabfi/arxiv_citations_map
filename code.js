@@ -75,57 +75,54 @@ $(function () {
 
 
     ////
+    // Add a paper
     ////
     $('#form').submit(function (event) {
         event.preventDefault();
 
-        let url = $('#form_text').val();
+        let form_text = $('#form_text');
+        let url = form_text.val();
+        let pdf_url = 'https://arxiv.org/pdf/' + url.split('/').pop() + '.pdf'
+        form_text.val('');
 
-        $('#form_text').val('');
-
+        // If not an arxiv link
         if (url.indexOf('arxiv.org/abs') < 0) {
-            Swal.fire({
+            swal({
                 position: 'top',
-                type: 'error',
+                icon: 'error',
                 title: 'arXiv link required (not directly the pdf)',
                 showConfirmButton: false,
                 timer: 1500
-            })
-        } else {
-            $.get({
-                url: url,
-                success: function (res) {
-                    paper = {
-                        'res': res,
-                        'title': $('h1.title.mathjax', $(res))[0].innerText.slice(6),
-                        'url': 'https://arxiv.org/pdf/' + url.split('/').pop() + '.pdf',
-                        'id': uuid4()
-                    };
-
-                    var already = false;
-
-                    papers.forEach(function (p) {
-                        if (paper.url === p.url) {
-                            already = true
-                        }
-                    });
-
-                    if (already) {
-                        Swal.fire({
-                            position: 'top',
-                            type: 'error',
-                            title: 'This paper is already in the graph',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    } else {
-                        papers.push(paper);
-
-                        showPDF(paper, cy);
-                    }
-                }
             });
+            return;
         }
+
+        // If paper already added
+        if (papers.some(e => e.url === pdf_url)) {
+            swal({
+                position: 'top',
+                icon: 'error',
+                title: 'This paper is already in the graph',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return;
+        }
+        
+        $.get({
+            url: url,
+            success: function (res) {
+                paper = {
+                    'res': res,
+                    'title': $('h1.title.mathjax', $(res))[0].innerText.slice(6),
+                    'url': 'https://arxiv.org/pdf/' + url.split('/').pop() + '.pdf',
+                    'id': uuid4()
+                };
+                papers.push(paper);
+                showPDF(paper, cy);
+            }
+        });
+
     });
 });
 

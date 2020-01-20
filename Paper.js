@@ -141,5 +141,9 @@ class Paper {
         } else if(papers.length < 4) {
             cy.fit(cy.filter('node'), 150);
         }
+
+        $('#form_text').removeAttr("disabled");
+        $('#form_submit').removeAttr("disabled");
+        $('#loader').hide();
     }
 }

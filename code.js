@@ -96,6 +96,9 @@ $(function () {
     ////
     $('#form').submit(function (event) {
         event.preventDefault();
+        $('#form_text').prop("disabled", true);
+        $('#form_submit').prop("disabled", true);
+        $('#loader').show().css("display", 'inline-block');
 
         let form_text = $('#form_text');
         let url = form_text.val();
@@ -105,6 +108,9 @@ $(function () {
 
         console.log(paper);
         if (paper == null) {
+            $('#form_text').removeAttr("disabled");
+            $('#form_submit').removeAttr("disabled");
+            $('#loader').hide();
             return;
         }
 

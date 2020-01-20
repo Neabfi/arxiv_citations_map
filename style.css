@@ -71,6 +71,11 @@ body {
     box-shadow: none;
 }
 
+.form_text:disabled {
+    background-color: #cfcfcf;
+    opacity: 1;
+}
+
 
 .form_submit {
     border: none;
@@ -88,6 +93,11 @@ body {
 
 .form_submit:active {
     background-color: #851B1B;
+}
+
+.form_submit:disabled {
+    background-color: #5e1313;
+    opacity: 1;
 }
 
 /**
@@ -114,4 +124,20 @@ body {
 
 .instructions_title:hover + .instructions {
     display: block;
+}
+
+
+
+/**
+* Loader
+**/
+
+.loader {
+    margin-top: 0;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    background-size: cover;
+    background-image: url("loader.gif");
+    display: none;
 }

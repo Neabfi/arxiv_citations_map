@@ -14,79 +14,29 @@ function uuid4() {
     return `${ho(view.getUint32(0), 8)}-${ho(view.getUint16(4), 4)}-${ho(view.getUint16(6), 4)}-${ho(view.getUint16(8), 4)}-${ho(view.getUint32(10), 8)}${ho(view.getUint16(14), 4)}`; /// Compile the canonical textual form from the array data
 }
 
-var papers = [];
 
 $(function () {
 
     ////
     //  cy init
     ////
-    var cy = cytoscape({
-        container: document.getElementById('cy'),
-        boxSelectionEnabled: false,
-        autounselectify: true,
-        style: cytoscape.stylesheet()
-            .selector('node')
-            .css({
-                'height': 80,
-                'width': 80,
-                'background-fit': 'cover',
-                'border-color': '#000',
-                'border-width': 3,
-                'border-opacity': 0.5
-            })
-            .selector('edge')
-            .css({
-                'curve-style': 'bezier',
-                'width': 6,
-                'target-arrow-shape': 'triangle',
-                'line-color': '#ffaaaa',
-                'target-arrow-color': '#ffaaaa'
-            }),
-        elements: {
-            nodes: [],
-            edges: []
-        },
-        layout: {
-            name: 'breadthfirst',
-            directed: true,
-            padding: 10,
-        },
-        zoom:{
-            level: 10
-        }
-    });
+    let graph = new Graph();
+
 
     ////
     //  Right click on nodes
     ////
-    cy.on('cxttap', 'node', function () {
+    graph.cy.on('cxttap', 'node', function () {
 
         let paperid = this.id();
 
-        cy.remove(cy.elements("node#" + paperid.replace('.', '-') + "]"));
+        graph.cy.remove(graph.cy.elements("node#" + paperid.replace('.', '-') + "]"));
 
-        console.log(paperid)
-        papers = papers.filter(function (paper) {
-            console.log(paper.arxivId);
+        graph.papers = graph.papers.filter(function (paper) {
             return paper.arxivId !== paperid;
         });
 
-
-        // Refresh graph
-        var layout = cy.layout({
-            name: 'breadthfirst',
-            directed: true,
-            padding: 1,
-            spacingFactor: 1.75
-        });
-        layout.run();
-        console.log(papers.length);
-        if(papers.length === 0) {
-            cy.fit(cy.filter('node'), 250);
-        } else if(papers.length < 4) {
-            cy.fit(cy.filter('node'), 150);
-        }
+        graph.refresh();
 
     });
 
@@ -104,9 +54,8 @@ $(function () {
         let url = form_text.val();
         form_text.val('');
 
-        let paper = Paper.CreatePaper(url, papers, cy);
+        let paper = Paper.CreatePaper(url, graph);
 
-        console.log(paper);
         if (paper == null) {
             $('#form_text').removeAttr("disabled");
             $('#form_submit').removeAttr("disabled");

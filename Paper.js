@@ -1,10 +1,10 @@
 class Paper {
 
-    static CreatePaper(url, papers, cy) {
-        if (!this.isUrlValid(url) || this.isPaperDuplicated(url, papers)) {
+    static CreatePaper(url, graph) {
+        if (!this.isUrlValid(url) || this.isPaperDuplicated(url, graph.papers)) {
             return null;
         }
-        return new Paper(url, papers, cy)
+        return new Paper(url, graph)
     }
 
     static isUrlValid(url) {
@@ -31,10 +31,9 @@ class Paper {
         return false;
     }
 
-    constructor(url, papers, cy) {
+    constructor(url, graph) {
         this.arxivUrl = url;
         this.arxivId = url.split('/').pop();
-        console.log(this.arxivId);
         this.pdfUrl = 'https://arxiv.org/pdf/' + this.arxivId + '.pdf';
 
         let promises = [
@@ -44,10 +43,9 @@ class Paper {
 
         Promise.all(promises).then((sucess) => {
             this.thumbnail = sucess[1];
-            this.add(papers, cy);
-            papers.push(this);
+            this.add(graph);
         }, function (err) {
-            console.log('ERROR')
+            console.error('ERROR')
         });
 
     }
@@ -73,12 +71,12 @@ class Paper {
         });
     }
 
-    add(papers, cy) {
+    add(graph) {
 
         ///*
         //   Add the node
         ///*
-        cy.add([
+        graph.cy.add([
             {
                 group: "nodes",
                 data: {
@@ -102,45 +100,30 @@ class Paper {
         //   Add the edges
         ///*
 
-        console.log(papers)
-        for(let i = 0; i < papers.length; i++) {
-            if(papers[i].references.has(this.arxivId)) {
-                console.log('references!')
-                cy.add([
+        for (let i = 0; i < graph.papers.length; i++) {
+            if (graph.papers[i].references.has(this.arxivId)) {
+                graph.cy.add([
                         {
                             group: "edges",
-                            data: {source: this.arxivId.replace('.', '-'), target: papers[i].arxivId.replace('.', '-')}
+                            data: {source: this.arxivId.replace('.', '-'), target: graph.papers[i].arxivId.replace('.', '-')}
                         }
                     ]
                 );
             }
 
-            if(papers[i].citations.has(this.arxivId)) {
-                console.log('citations!')
-                cy.add([
+            if (graph.papers[i].citations.has(this.arxivId)) {
+                graph.cy.add([
                         {
                             group: "edges",
-                            data: {source: papers[i].arxivId.replace('.', '-'), target: this.arxivId.replace('.', '-')}
+                            data: {source: graph.papers[i].arxivId.replace('.', '-'), target: this.arxivId.replace('.', '-')}
                         }
                     ]
                 );
             }
         }
 
-        // Refresh graph
-        var layout = cy.layout({
-            name: 'breadthfirst',
-            directed: true,
-            padding: 1,
-            spacingFactor: 1.75
-        });
-        layout.run();
-        console.log(papers.length);
-        if(papers.length === 0) {
-            cy.fit(cy.$('#' + this.arxivId.replace('.', '-')), 230);
-        } else if(papers.length < 4) {
-            cy.fit(cy.filter('node'), 150);
-        }
+        graph.papers.push(this);
+        graph.refresh();
 
         $('#form_text').removeAttr("disabled");
         $('#form_submit').removeAttr("disabled");

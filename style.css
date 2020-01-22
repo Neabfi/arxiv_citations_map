@@ -89,6 +89,7 @@ body {
 
 .form_submit:hover {
     box-shadow: none;
+    cursor: pointer;
 }
 
 .form_submit:active {

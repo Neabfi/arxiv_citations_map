@@ -59,4 +59,20 @@ class Graph {
             this.cy.fit(this.cy.filter('node'), 150);
         }
     }
+
+    load() {
+
+    }
+
+
+    save() {
+        let text = "";
+        this.papers.forEach((paper) => {
+            text += (paper.arxivUrl + '\n')
+        });
+
+        $('#save_file').attr({
+            href: "data:text/plain;charset=utf-8," + encodeURIComponent(text),
+        })[0].click();
+    }
 }

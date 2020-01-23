@@ -44,12 +44,11 @@ $(function () {
     ////
     // Add a paper
     ////
-    $('#form').submit(function (event) {
+    $('#form').submit((event) => {
         event.preventDefault();
         $('#form_text').prop("disabled", true);
         $('#form_submit').prop("disabled", true);
         $('#loader').show().css("display", 'inline-block');
-
         let form_text = $('#form_text');
         let url = form_text.val();
         form_text.val('');
@@ -64,6 +63,30 @@ $(function () {
         }
 
     });
+
+    // Save
+    $('#save_button').click((event) => {
+        graph.save();
+    });
+
+    // Load
+    $('#load_button').click(() => {
+        $('#file_input').click();
+    });
+
+    $('#file_input').change(() => {
+
+        let file = $('#file_input').prop('files')[0];
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            reader.result.trim().split('\n').forEach((arxivUrl) => {
+                Paper.CreatePaper(arxivUrl, graph);
+            });
+        };
+        reader.readAsText(file)
+    });
+
+
 });
 
 

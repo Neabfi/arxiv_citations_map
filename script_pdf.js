@@ -25,15 +25,15 @@ function showPage(page_no, cy, paper, resolve) {
     __PDF_DOC.getPage(page_no).then(function (page) {
 
         // As the canvas is of a fixed width we need to set the scale of the viewport accordingly
-        var scale_required = __CANVAS.width / page.getViewport(1).width;
+        let scale_required = __CANVAS.width / page.getViewport(1).width;
 
         // Get viewport of the page at required scale
-        var viewport = page.getViewport(scale_required);
+        let viewport = page.getViewport(scale_required);
 
         // Set canvas height
         __CANVAS.height = viewport.height;
 
-        var renderContext = {
+        let renderContext = {
             canvasContext: __CANVAS_CTX,
             viewport: viewport
         };

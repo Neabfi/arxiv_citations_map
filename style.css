@@ -2,7 +2,13 @@
 * General
 **/
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
+    margin: 0;
     font: 14px helvetica neue, helvetica, arial, sans-serif;
 }
 
@@ -40,6 +46,35 @@ body {
     box-shadow: none;
 }
 
+
+/**
+* Components
+**/
+
+.button {
+    border: none;
+    height: 24px;
+    padding: 0 20px;
+    background-color: #b31b1b;
+    box-shadow: 1px 1px 1px grey;
+    color: white;
+    outline: none;
+}
+
+.button:hover {
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #851B1B;
+}
+
+.button:disabled {
+    background-color: #5e1313;
+    opacity: 1;
+}
+
 /**
 * Form
 **/
@@ -56,6 +91,7 @@ body {
 .form_container {
     z-index: 1000;
     position: fixed;
+    margin: 10px;
 }
 
 .form_text {
@@ -76,30 +112,6 @@ body {
     opacity: 1;
 }
 
-
-.form_submit {
-    border: none;
-    height: 24px;
-    width: 40px;
-    background-color: #b31b1b;
-    box-shadow: 1px 1px 1px grey;
-    color: white;
-    outline: none;
-}
-
-.form_submit:hover {
-    box-shadow: none;
-    cursor: pointer;
-}
-
-.form_submit:active {
-    background-color: #851B1B;
-}
-
-.form_submit:disabled {
-    background-color: #5e1313;
-    opacity: 1;
-}
 
 /**
 * Instructions
@@ -128,7 +140,6 @@ body {
 }
 
 
-
 /**
 * Loader
 **/
@@ -141,4 +152,16 @@ body {
     background-size: cover;
     background-image: url("loader.gif");
     display: none;
+}
+
+
+/**
+* Footer
+**/
+
+.footer_container {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 10px;
 }

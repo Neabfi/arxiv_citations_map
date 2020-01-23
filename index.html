@@ -17,7 +17,7 @@
     <h1 class="title">arXiv papers map</h1>
     <form id="form" autocomplete="off">
         <input type="text" name="" id="form_text" class="form_text" placeholder="arXiv URL">
-        <input type="submit" name="" id="form_submit" class="form_submit" value="Add">
+        <input type="submit" name="" id="form_submit" class="button" value="Add">
         <div id="loader" class="loader"></div>
     </form>
     <p class="instructions_title">How to use it?</p>
@@ -29,6 +29,12 @@
     </p>
 </div>
 
+<div class="footer_container">
+    <button id="save_button" class="button">Save</button>
+    <button id="load_button" class="button">Load</button>
+    <input id="file_input" type="file" style="display: none;" />
+    <a href="" id="save_file" download="save_arxivMap.txt" style="display: none;"></a>
+</div>
 
 <script src="./node_modules/jquery/dist/jquery.min.js"></script>
 <script src="./node_modules/sweetalert/dist/sweetalert.min.js"></script>

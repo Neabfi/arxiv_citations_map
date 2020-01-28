@@ -27,17 +27,10 @@ $(function () {
     //  Right click on nodes
     ////
     graph.cy.on('cxttap', 'node', function () {
-
         let paperid = this.id();
-
-        graph.cy.remove(graph.cy.elements("node#" + paperid.replace('.', '-') + "]"));
-
-        graph.papers = graph.papers.filter(function (paper) {
-            return paper.arxivId !== paperid;
-        });
-
+        graph.cy.remove(graph.cy.elements("node#" + paperid));
+        graph.papers = graph.papers.filter(paper => paper.arxivId !== paperid.replace('-', '.'));
         graph.refresh();
-
     });
 
 

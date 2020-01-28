@@ -1,10 +1,6 @@
 class Graph {
     constructor() {
 
-        if (Graph.instance instanceof Graph) {
-            return Graph.instance
-        }
-
         this.papers = [];
         this.cy = cytoscape({
             container: document.getElementById('cy'),
@@ -41,9 +37,6 @@ class Graph {
                 level: 10
             }
         });
-
-        Object.freeze(this);
-        Graph.instance = this;
     }
 
     refresh() {

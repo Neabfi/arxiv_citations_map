@@ -11,7 +11,7 @@
   "dependencies": {
     "cytoscape": "^3.13.0",
     "htmlparser": "^1.7.7",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "pdfjs-dist": "^1.5.188",
     "sweetalert": "^2.1.2"
   }
